@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pentatonica privacy policy</title>
+    <meta name="description" content="What Pentatonica sends over the Internet and what happens to it.">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <style>
+        /* The game's own interface colours (UiColors in shared), light and dark. */
+        :root {
+            --background: #F7F4EE;
+            --panel: #EAE4DA;
+            --ink: #3A3530;
+            --ink-muted: #7A7268;
+            --link: #2F7A62;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #1C1A18;
+                --panel: #2E2A26;
+                --ink: #EDE7DD;
+                --ink-muted: #A39A8F;
+                --link: #5DCAA5;
+            }
+        }
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--ink);
+            font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 16px 64px;
+        }
+        h1 {
+            font-size: 2em;
+            line-height: 1.2;
+            margin: 0 0 4px;
+        }
+        /* The title in the tile colours of the five notes, as on the game's screen. */
+        .c { color: #F09595; } .d { color: #EF9F27; } .e { color: #97C459; }
+        .g { color: #5DCAA5; } .a { color: #AFA9EC; }
+        .updated {
+            color: var(--ink-muted);
+            margin: 0 0 32px;
+        }
+        h2 {
+            font-size: 1.15em;
+            margin: 32px 0 8px;
+        }
+        p { margin: 0 0 12px; }
+        a { color: var(--link); overflow-wrap: anywhere; }
+        section {
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 4px 20px 8px;
+            margin-top: 16px;
+        }
+        footer {
+            margin-top: 40px;
+            color: var(--ink-muted);
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1><span class="c">Pe</span><span class="d">nt</span><span class="e">at</span><span class="g">on</span><span class="a">ica</span> privacy policy</h1>
+    <p class="updated">Last updated: September 22, 2026</p>
+
+    <p>Pentatonica is a puzzle game for Windows, Android and the browser. This policy explains what
+        the game sends over the Internet and what happens to it.</p>
+
+    <section>
+        <h2>What stays on your device</h2>
+        <p>Your game in progress and your settings are stored only on your device and never sent
+            anywhere.</p>
+    </section>
+
+    <section>
+        <h2>The leaderboard</h2>
+        <p>The leaderboard is the only part of the game that uses the Internet. Opening it downloads
+            the current tables from the leaderboard server.</p>
+        <p>When a finished game makes the leaderboard, the game asks you for a name. Once you have
+            one, each finished game is sent to the server: its score, the highest note reached, the
+            number of moves, how long it lasted and when it ended. The number of moves and the
+            duration are used only to check that the game is plausible and are not stored.</p>
+        <p>The server stores your name, your best score of all time, and your best score for each of
+            the last 30 days. Older daily scores are deleted. Individual games are not kept.</p>
+        <p>When you choose a name, the game receives a player code, which lets you use the same name
+            on another device. The server keeps only a one-way hash of this code, not the code
+            itself. While you have a name, the game also asks the server for your best score when it
+            starts, so that a best score set on another device appears on this one.</p>
+        <p>No email, account, contact details or device identifiers are collected. There are no ads
+            and no analytics or tracking services.</p>
+    </section>
+
+    <section>
+        <h2>Your network address</h2>
+        <p>To prevent abuse, the server records your IP address when someone registers a new name or
+            enters an unknown player code. These records are used only to limit repeated attempts
+            and are deleted after an hour.</p>
+    </section>
+
+    <section>
+        <h2>Hosting</h2>
+        <p>The leaderboard server runs on Cloudflare Workers, and the browser version is hosted on
+            GitHub Pages. Both process network requests, including your IP address, as described in
+            their own privacy policies.</p>
+    </section>
+
+    <section>
+        <h2>Your choices</h2>
+        <p>You can turn score sending off in the game's settings at any time. Nothing is sent without
+            a name. To have your name and scores removed from the leaderboard, open an issue at
+            <a href="https://github.com/Mardivil/Pentatonica/issues">github.com/Mardivil/Pentatonica/issues</a>.</p>
+    </section>
+
+    <footer><a href="./">Play Pentatonica</a></footer>
+</main>
+</body>
+</html>

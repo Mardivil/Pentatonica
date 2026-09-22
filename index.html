@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- No zoom: the game fits the screen itself, and a pinch or double tap would fight its swipes. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Pentatonica</title>
+    <meta name="theme-color" content="#1C1A18">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Pentatonica">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #1C1A18;
+            /* Swipes belong to the game, not to scrolling, pull-to-refresh or the back gesture. */
+            touch-action: none;
+            overscroll-behavior: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+    </style>
+    <script>
+        // Makes the game installable and lets it start offline; see sw.js.
+        if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
+    </script>
+    <script src="audio.js"></script>
+    <script src="pentatonica.js"></script>
+</head>
+<body>
+</body>
+</html>

@@ -22,3 +22,5 @@ to merge two equal notes into the next note in the pentatonic scale, moving up f
   it. Allow your browser to install apps when asked.
 
 Swipe on a touch screen, or use the arrow keys or WASD.
+
+Privacy policy: [pentatonica.pp.ua/privacy.html](https://pentatonica.pp.ua/privacy.html)

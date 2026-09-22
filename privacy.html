@@ -9,8 +9,8 @@
     <style>
         /* The game's own interface colours (UiColors in shared), light and dark. */
         :root {
-            --background: #F7F4EE;
-            --panel: #EAE4DA;
+            --background: #EFE6D6;
+            --panel: #E2D9C8;
             --ink: #3A3530;
             --ink-muted: #7A7268;
             --link: #2F7A62;
@@ -40,14 +40,20 @@
             line-height: 1.2;
             margin: 0 0 4px;
         }
-        /* The title as the game draws it (Title in GameScreen.kt): each letter takes the colour of
-           the next note, the note's darkest shade on the light theme and its pastel face on the dark. */
-        .n0 { color: #501313; } .n1 { color: #412402; } .n2 { color: #173404; }
-        .n3 { color: #04342C; } .n4 { color: #26215C; }
-        @media (prefers-color-scheme: dark) {
-            .n0 { color: #F09595; } .n1 { color: #EF9F27; } .n2 { color: #97C459; }
-            .n3 { color: #5DCAA5; } .n4 { color: #AFA9EC; }
+        /* The game's name as the game draws it (Title in GameScreen.kt): each letter in the lightest
+           face of the next note, on a plate in the light theme's ink, which the dark theme does
+           without. */
+        .name {
+            display: inline-block;
+            background: #3A3530;
+            border-radius: 10px;
+            padding: 2px 10px 5px;
         }
+        @media (prefers-color-scheme: dark) {
+            .name { background: none; padding: 0; }
+        }
+        .n0 { color: #F09595; } .n1 { color: #EF9F27; } .n2 { color: #97C459; }
+        .n3 { color: #5DCAA5; } .n4 { color: #AFA9EC; }
         .updated {
             color: var(--ink-muted);
             margin: 0 0 32px;
@@ -72,7 +78,7 @@
 </head>
 <body>
 <main>
-    <h1><span class="n0">P</span><span class="n1">e</span><span class="n2">n</span><span class="n3">t</span><span class="n4">a</span><span class="n0">t</span><span class="n1">o</span><span class="n2">n</span><span class="n3">i</span><span class="n4">c</span><span class="n0">a</span> privacy policy</h1>
+    <h1><span class="name"><span class="n0">P</span><span class="n1">e</span><span class="n2">n</span><span class="n3">t</span><span class="n4">a</span><span class="n0">t</span><span class="n1">o</span><span class="n2">n</span><span class="n3">i</span><span class="n4">c</span><span class="n0">a</span></span> privacy policy</h1>
     <p class="updated">Last updated: September 22, 2026</p>
 
     <p>Pentatonica is a puzzle game for Windows, Android and the browser. This policy explains what

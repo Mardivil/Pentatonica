@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pentatonica leaderboard: delete your entry</title>
+    <meta name="description" content="How to delete your Pentatonica leaderboard entry: your name and scores.">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <style>
+        /* The game's own interface colours (UiColors in shared), light and dark. */
+        :root {
+            --background: #EFE6D6;
+            --panel: #E2D9C8;
+            --ink: #3A3530;
+            --ink-muted: #7A7268;
+            --link: #2F7A62;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #1C1A18;
+                --panel: #2E2A26;
+                --ink: #EDE7DD;
+                --ink-muted: #A39A8F;
+                --link: #5DCAA5;
+            }
+        }
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--ink);
+            font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 16px 64px;
+        }
+        h1 {
+            font-size: 2em;
+            line-height: 1.2;
+            margin: 0 0 4px;
+        }
+        /* The game's name as the game draws it (Title in GameScreen.kt): each letter in the lightest
+           face of the next note, on a plate in the light theme's ink, which the dark theme does
+           without. */
+        .name {
+            display: inline-block;
+            background: #3A3530;
+            border-radius: 10px;
+            padding: 2px 10px 5px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .name { background: none; padding: 0; }
+        }
+        .n0 { color: #F09595; } .n1 { color: #EF9F27; } .n2 { color: #97C459; }
+        .n3 { color: #5DCAA5; } .n4 { color: #AFA9EC; }
+        .updated {
+            color: var(--ink-muted);
+            margin: 0 0 32px;
+        }
+        h2 {
+            font-size: 1.15em;
+            margin: 32px 0 8px;
+        }
+        p { margin: 0 0 12px; }
+        a { color: var(--link); overflow-wrap: anywhere; }
+        section {
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 4px 20px 8px;
+            margin-top: 16px;
+        }
+        footer {
+            margin-top: 40px;
+            color: var(--ink-muted);
+        }
+        .form {
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            font: 18px ui-monospace, Consolas, "Roboto Mono", monospace;
+            color: var(--ink);
+            background: var(--background);
+            border: 1px solid var(--ink-muted);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+        button {
+            font: 600 17px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            color: var(--background);
+            background: var(--ink);
+            border: 0;
+            border-radius: 10px;
+            padding: 11px 22px;
+            cursor: pointer;
+        }
+        button:disabled { opacity: 0.6; cursor: default; }
+        #result { margin: 12px 0 0; min-height: 1.6em; }
+    </style>
+</head>
+<body>
+<main>
+    <h1><span class="name"><span class="n0">P</span><span class="n1">e</span><span class="n2">n</span><span class="n3">t</span><span class="n4">a</span><span class="n0">t</span><span class="n1">o</span><span class="n2">n</span><span class="n3">i</span><span class="n4">c</span><span class="n0">a</span></span> leaderboard: delete your entry</h1>
+    <p class="updated">Last updated: September 23, 2026</p>
+
+    <p>Pentatonica by Mardivil keeps a leaderboard entry for each player who chose a name: the name,
+        the best score of all time and the best score of each of the last 30 days. Deleting it
+        removes all of that from the server at once. Nothing is kept afterwards.</p>
+
+    <h2>Delete in the game</h2>
+    <p>Open Settings and, under Player code, choose <strong>Delete me from the leaderboard</strong>.</p>
+
+    <h2>Delete on this website</h2>
+    <p>Enter your player code. The game shows it in Settings, under Player code. The code is the
+        only proof that the entry is yours, so an entry cannot be deleted without it.</p>
+
+    <form class="form" id="form" novalidate>
+        <label for="code">Player code</label>
+        <input id="code" name="code" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" maxlength="24">
+        <button id="delete" type="submit">Delete my entry</button>
+        <p id="result" role="status" aria-live="polite"></p>
+    </form>
+
+    <footer><a href="privacy.html">Privacy policy</a> · <a href="./">Play Pentatonica</a></footer>
+</main>
+<script>
+// The leaderboard server, the address LEADERBOARD_URL in Leaderboard.kt holds. A local copy of the
+// page may name another with ?leaderboard=, the way the game's developer build does.
+const LIVE = "https://pentatonica-leaderboard.mardivil.workers.dev";
+const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+const SERVER = (local && new URLSearchParams(location.search).get("leaderboard")) || LIVE;
+
+const ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+
+// A code as typed, read the way the game reads it (PlayerCode.parse): case, spaces and dashes
+// ignored, O as 0, I and L as 1. The first players' 12-character codes are read too.
+function parseCode(typed) {
+    const code = typed.toUpperCase().replace(/[\s-]/g, "").replace(/O/g, "0").replace(/[IL]/g, "1");
+    if (code.length !== 16 && code.length !== 12) return null;
+    for (const c of code) if (!ALPHABET.includes(c)) return null;
+    return code.match(/.{4}/g).join("-");
+}
+
+const MESSAGES = {
+    done: "Deleted. Your name and scores are no longer on the leaderboard.",
+    unknown: "This code does not exist.",
+    tooMany: "Too many attempts. Try again in an hour.",
+    offline: "Could not reach the leaderboard. Try again later.",
+};
+
+async function request(method, path, code) {
+    const response = await fetch(SERVER + path, { method, headers: { "X-Player": code } });
+    return response;
+}
+
+// Deletes the player [code] belongs to. A 12-character code is traded for a new one first,
+// because the server accepts it for nothing else.
+async function deletePlayer(code) {
+    let current = code;
+    if (code.replace(/-/g, "").length === 12) {
+        const traded = await request("POST", "/players/me/code", code);
+        if (traded.status !== 200) return traded.status;
+        current = (await traded.json()).code;
+    }
+    return (await request("DELETE", "/players/me", current)).status;
+}
+
+const form = document.getElementById("form");
+const input = document.getElementById("code");
+const button = document.getElementById("delete");
+const result = document.getElementById("result");
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const code = parseCode(input.value);
+    if (code === null) {
+        result.textContent = MESSAGES.unknown;
+        return;
+    }
+    button.disabled = true;
+    result.textContent = "";
+    try {
+        const status = await deletePlayer(code);
+        if (status === 204) {
+            result.textContent = MESSAGES.done;
+            input.value = "";
+        } else if (status === 401 || status === 403 || status === 404) {
+            result.textContent = MESSAGES.unknown;
+        } else if (status === 429) {
+            result.textContent = MESSAGES.tooMany;
+        } else {
+            result.textContent = MESSAGES.offline;
+        }
+    } catch (error) {
+        result.textContent = MESSAGES.offline;
+    } finally {
+        button.disabled = false;
+    }
+});
+</script>
+</body>
+</html>

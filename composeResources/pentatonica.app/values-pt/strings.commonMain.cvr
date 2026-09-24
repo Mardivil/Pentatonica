@@ -22,9 +22,9 @@ string|culture_celtic|Q2VsdGFz
 string|culture_china|Q2hpbmE=
 string|culture_india|w41uZGlh
 string|culture_indonesia|SW5kb27DqXNpYQ==
-string|culture_intro|Q2FkYSBjdWx0dXJhIHRlbSBhIHN1YSBwcsOzcHJpYSBlc2NhbGEgZSBvIHNldSBwcsOzcHJpbyBpbnN0cnVtZW50by4gQXMgcmVncmFzIHPDo28gYXMgbWVzbWFzLCBzw7MgbXVkYW0gbyBzb20gZSBvcyBub21lcyBkYXMgbm90YXMu
 string|culture_japan|SmFww6Nv
 string|culture_middle_east|T3JpZW50ZSBNw6lkaW8=
+string|culture_picker|Tm90YXM=
 string|delete_player_body|U2V1IG5vbWUsIHNldSBjw7NkaWdvIGRlIGpvZ2Fkb3IgZSB0b2RhcyBhcyBzdWFzIHBvbnR1YcOnw7VlcyBzZXLDo28gYXBhZ2Fkb3MgZG8gc2Vydmlkb3IgcGFyYSBzZW1wcmUuIFNldSBqb2dvIGUgc2V1IHJlY29yZGUgbmVzdGUgZGlzcG9zaXRpdm8gY29udGludWFtLg==
 string|delete_player_title|UmVtb3ZlciB2b2PDqiBkbyByYW5raW5nPw==
 string|delete_player_yes|RXhjbHVpcg==
@@ -32,7 +32,6 @@ string|delete_player|UmVtb3Zlci1tZSBkbyByYW5raW5n
 string|done|Q29uY2x1w61kbw==
 string|game_over_score|UG9udG9zOiAlMSRk
 string|game_over_title|U2VtIG1haXMgbW92aW1lbnRvcw==
-string|hemitonic|Y29tIHNlbWl0b25z
 string|ladder_next|cHLDs3hpbWE=
 string|language_system_computer|SWd1YWwgYW8gc2lzdGVtYQ==
 string|language_system|Q29tbyBubyB0ZWxlZm9uZQ==
@@ -48,7 +47,6 @@ string|leaderboard_retry|VGVudGFyIGRlIG5vdm8=
 string|leaderboard_sending_off|RGVzYXRpdmFkbw==
 string|leaderboard_sending_on|QXRpdmFkbw==
 string|leaderboard|UmFua2luZw==
-string|music_sound_off_hint|TyBzb20gZXN0w6EgZGVzYXRpdmFkbyBuYSBhYmEgR2VyYWwuIEEgY3VsdHVyYSBhaW5kYSBkZWZpbmUgb3Mgbm9tZXMgZGFzIG5vdGFzIG5hcyBwZcOnYXMu
 string|name_hint|U2V1IG5vbWU=
 string|name_not_now|QWdvcmEgbsOjbw==
 string|name_prompt_title|U3VhIHBvbnR1YcOnw6NvIGVudHJvdSBubyByYW5raW5nIQ==
@@ -62,15 +60,7 @@ string|octave_notice_on|QXRpdmFkbw==
 string|player_code_hint|RGlnaXRlIGVzdGUgY8OzZGlnbyBlbSBvdXRybyBkaXNwb3NpdGl2byBwYXJhIGpvZ2FyIGzDoSBjb20gbyBtZXNtbyBub21lLiBOw6NvIG1vc3RyZSBhIG5pbmd1w6ltLg==
 string|player_code_none|U2V1IGPDs2RpZ28gYXBhcmVjZXLDoSBxdWFuZG8gdm9jw6ogZXNjb2xoZXIgdW0gbm9tZS4=
 string|player_deleted|Vm9jw6ogZm9pIHJlbW92aWRvIGRvIHJhbmtpbmcu
-string|scale_america|cGVudGF0w7RuaWNhIG1lbm9yLCBibHVlcw==
-string|scale_celtic|cGVudGF0w7RuaWNhIG1haW9yOiBFc2PDs2NpYSwgSXJsYW5kYQ==
-string|scale_china|cGVudGF0w7RuaWNhIG1haW9yIChtb2RvIGdvbmcp
-string|scale_india|cmFnYSBNYWxrYXVucw==
-string|scale_indonesia|c2xlbmRybzogY2luY28gcGFzc29zIHF1YXNlIGlndWFpcw==
-string|scale_japan|ZXNjYWxhIGhpcmFqb3NoaQ==
-string|scale_middle_east|cGVudGF0w7RuaWNhIMKrZWfDrXBjaWHCuw==
 string|score|UG9udG9z
-string|section_culture|Q3VsdHVyYQ==
 string|section_enter_code|Q8OzZGlnbyBkZSBvdXRybyBkaXNwb3NpdGl2bw==
 string|section_language|SWRpb21h
 string|section_leaderboard_sending|RW52aW8gZGUgcG9udHVhw6fDtWVz
@@ -83,8 +73,6 @@ string|section_vibration|VmlicmHDp8Ojbw==
 string|settings|Q29uZmlndXJhw6fDtWVz
 string|sound_off|RGVzYXRpdmFkbw==
 string|sound_on|QXRpdmFkbw==
-string|tab_general|R2VyYWw=
-string|tab_music|Tm90YXM=
 string|theme_dark|RXNjdXJv
 string|theme_light|Q2xhcm8=
 string|timbre_gamelan|R2FtZWxhbg==

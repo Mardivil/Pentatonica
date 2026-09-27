@@ -22,7 +22,7 @@ const WASM = /[0-9a-f]{20}\.wasm/g;
 // step with shared/src/commonMain/composeResources/values*.
 const LANGUAGES = ["", "-de", "-es", "-fr", "-pt", "-uk"];
 const SHELL = [
-    "./",
+    "index.html",
     "audio.js",
     "pentatonica.js",
     "manifest.webmanifest",
@@ -37,6 +37,15 @@ self.addEventListener("install", event => event.waitUntil(precache().then(() => 
 async function precache() {
     const cache = await caches.open(CACHE);
     await cache.addAll(SHELL);
+    // "./" is the same page where the server answers a folder with its index.html, as GitHub Pages
+    // does. itch.io's server answers it with 404, and a failed entry in addAll fails the whole
+    // install, so it is cached only when it is there.
+    try {
+        const page = await fetch("./");
+        if (page.ok) await cache.put("./", page);
+    } catch (offline) {
+        // Cached on a later visit, when the page is requested with a connection.
+    }
     const script = await (await cache.match("pentatonica.js")).text();
     await cache.addAll([...new Set(script.match(WASM) || [])]);
 }
@@ -75,7 +84,8 @@ async function networkFirst(request) {
         }
         return response;
     } catch (offline) {
-        const cached = await cache.match(request);
+        // itch.io opens the page with a query (index.html?v=...) that changes with each upload.
+        const cached = await cache.match(request, {ignoreSearch: true});
         if (cached) return cached;
         throw offline;
     }

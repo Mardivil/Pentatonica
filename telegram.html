@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--
+        The game as a Telegram Mini App: the bot's Mini App opens this page, not index.html, so
+        the site's ordinary visitors never load Telegram's script. It is index.html plus the calls
+        below: keep the rest of the two pages in step.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Pentatonica</title>
+    <meta name="theme-color" content="#1C1A18">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #1C1A18;
+            /* Swipes belong to the game, not to scrolling, pull-to-refresh or the back gesture. */
+            touch-action: none;
+            overscroll-behavior: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+    </style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        (function () {
+            const app = window.Telegram && window.Telegram.WebApp;
+            if (!app) return;
+            app.ready();
+            // A Mini App opens at half the screen's height until it asks for all of it.
+            app.expand();
+            // Telegram closes a Mini App on a swipe down, which on the board is a move.
+            if (app.isVersionAtLeast("7.7")) app.disableVerticalSwipes();
+            if (app.isVersionAtLeast("6.1")) {
+                app.setHeaderColor("#1C1A18");
+                app.setBackgroundColor("#1C1A18");
+            }
+        })();
+    </script>
+    <script>
+        // Lets the game start offline once it has been played; see sw.js.
+        if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
+    </script>
+    <script src="audio.js"></script>
+    <script src="pentatonica.js"></script>
+</head>
+<body>
+</body>
+</html>
